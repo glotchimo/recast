@@ -130,6 +130,11 @@ func (r *Responder) Fail(i *dg.InteractionCreate, ctx utils.Failure) error {
 		description = fmt.Sprintf("%s\n\nIf this doesn't seem right, let an admin know.", ctx.Message)
 		color = 0xFF0000
 
+	case utils.ErrCooldown:
+		title = "Cooldown Active"
+		description = ctx.Message
+		color = 0xFFA500
+
 	case utils.ErrNotFound:
 		title = "Not Found"
 		description = ctx.Message

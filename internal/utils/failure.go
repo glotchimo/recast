@@ -6,6 +6,7 @@ const (
 	ErrInternal ErrorType = iota
 	ErrBadInput
 	ErrNotAllowed
+	ErrCooldown
 	ErrNotFound
 	ErrTooLarge
 )

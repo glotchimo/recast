@@ -27,9 +27,9 @@ func NewDatabase(l *slog.Logger, databaseURL string) (*Database, error) {
 		return nil, errutil.With(err)
 	}
 
-	db.SetMaxOpenConns(25)
-	db.SetMaxIdleConns(5)
-	db.SetConnMaxLifetime(5 * time.Minute)
+	db.SetMaxOpenConns(50)
+	db.SetMaxIdleConns(10)
+	db.SetConnMaxLifetime(10 * time.Minute)
 	db.SetConnMaxIdleTime(5 * time.Minute)
 
 	cache := sq.NewStmtCache(db)
@@ -303,7 +303,7 @@ func (db *Database) GetGuild(ctx context.Context, id string) (*models.Guild, err
 		&g.Updated,
 		&g.Deleted,
 	); err != nil {
-		return nil, errutil.Wrap(err)
+		return nil, errutil.With(err)
 	}
 
 	if err := json.Unmarshal(settingsRaw, &g.Settings); err != nil {
